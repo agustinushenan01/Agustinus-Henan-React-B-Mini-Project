@@ -2,7 +2,7 @@
 
 export default function PageNotFound() {
     return (
-        <main className="grid selection:bg-gray-700 selection:text-white px-3 sm:grid-cols-6 lg:grid-cols-12 w-full py-4 sm:py-6 md:py-7 lg:py-10 bg-darkprimary min-h-96 h-[400px] max-h-[90dvh]">
+        <main className="grid selection:bg-gray-700 selection:text-white px-3 sm:grid-cols-6 lg:grid-cols-12 w-full py-4 sm:py-6 md:py-7 lg:py-10 bg-darkprimary h-[70dvh]">
             <aside className=" sm:col-span-1 lg:col-span-3"></aside>
             <article className="sm:col-span-4 lg:col-span-6 text-center flex flex-col items-center justify-center">
                 <h1 className="text-white mb-4 font-medium text-2xl lg:text-3xl">Page not found</h1>
