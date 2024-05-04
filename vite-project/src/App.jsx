@@ -1,5 +1,6 @@
 import PageNotFound from "./pages/PageNotFound"
 import Navbar from "./components/HeaderNavbar"
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <main>
       <Navbar />
       <PageNotFound />
+      <Footer />
     </main>
   )
 }
