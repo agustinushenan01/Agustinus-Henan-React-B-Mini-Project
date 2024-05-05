@@ -38,23 +38,6 @@ export default function HeaderNavbar() {
                                         alt="Setapku"
                                     />
                                 </div>
-                                <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4">
-                                        {navigation.map((item) => (
-                                            <a
-                                                key={item.name}
-                                                href={item.href}
-                                                className={`focus:outline-none focus:ring focus:ring-primary selection:bg-gray-700 selection:text-white ${classNames(
-                                                    item.current ? 'bg-primary text-white hover:bg-darkprimary' : 'border border-primary text-primary hover:bg-primary hover:text-white',
-                                                    'rounded-md px-3 py-2 text-sm font-medium'
-                                                )}`}
-                                                aria-current={item.current ? 'page' : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
                             </div>
                             <div className="relative hidden sm:block">
                                 <label htmlFor="Search" className="sr-only"> Search </label>
@@ -107,8 +90,26 @@ export default function HeaderNavbar() {
                                     </button>
                                 </span>
 
+                                <div className="hidden sm:ml-6 sm:block">
+                                    <div className="flex space-x-4">
+                                        {navigation.map((item) => (
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                className={`focus:outline-none focus:ring focus:ring-primary selection:bg-gray-700 selection:text-white ${classNames(
+                                                    item.current ? 'bg-primary text-white hover:bg-darkprimary' : 'border border-primary text-primary hover:bg-primary hover:text-white',
+                                                    'rounded-md px-3 py-2 text-sm font-medium'
+                                                )}`}
+                                                aria-current={item.current ? 'page' : undefined}
+                                            >
+                                                {item.name}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+
                                 {/* Profile dropdown */}
-                                <Menu as="div" className="relative ml-3">
+                                {/* <Menu as="div" className="relative ml-3">
                                     <div>
                                         <Menu.Button className="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary">
                                             <span className="absolute -inset-1.5" />
@@ -164,7 +165,7 @@ export default function HeaderNavbar() {
                                             </Menu.Item>
                                         </Menu.Items>
                                     </Transition>
-                                </Menu>
+                                </Menu> */}
                             </div>
                         </div>
                     </div>
