@@ -130,7 +130,7 @@ export default function Footer() {
                 </div>
             </section>
             <section className="bg-neutral-900 text-center py-2">
-                <h6 className="text-white font-medium text-base md:text-lg">Copyright ©{currentYear} SetapKu| Agustinus Henan All rights reserved.</h6>
+                <h6 className="text-white font-medium text-xs md:text-base">Copyright ©{currentYear} SetapKu| Agustinus Henan All rights reserved.</h6>
             </section>
         </footer>
     )

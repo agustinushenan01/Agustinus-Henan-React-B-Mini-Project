@@ -13,7 +13,7 @@ function classNames(...classes) {
 
 export default function HeaderNavbar() {
     return (
-        <Disclosure as="nav" className="bg-white">
+        <Disclosure as="nav" className="bg-white drop-shadow">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -96,7 +96,7 @@ export default function HeaderNavbar() {
                                             <a
                                                 key={item.name}
                                                 href={item.href}
-                                                className={`focus:outline-none focus:ring focus:ring-primary selection:bg-gray-700 selection:text-white ${classNames(
+                                                className={`focus:outline-none active:shadow-[1px_1px_0px_1px_rgba(0,0,0,0.3)] shadow-[5px_5px_0px_1px_rgba(0,0,0,0.3)] selection:bg-gray-700 selection:text-white ${classNames(
                                                     item.current ? 'bg-primary text-white hover:bg-darkprimary' : 'border border-primary text-primary hover:bg-primary hover:text-white',
                                                     'rounded-md px-3 py-2 text-sm font-medium'
                                                 )}`}
