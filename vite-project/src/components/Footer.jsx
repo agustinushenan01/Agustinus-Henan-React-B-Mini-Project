@@ -5,24 +5,24 @@ export default function Footer() {
 
     return (
         <footer>
-            <section className="bg-neutral-800 grid grid-cols-12 text-white py-12">
-                <div className="col-span-4 flex items-center">
+            <section className="bg-neutral-800 sm:grid grid-cols-12 text-white py-12 px-3 sm:px-0">
+                <div className="mb-4 sm:mb-0 sm:col-span-4 flex items-center">
                     <img src={logo} alt="logo" />
                 </div>
-                <div className="col-span-4 flex flex-col pl-5">
+                <div className="mb-4 sm:mb-0 sm:col-span-4 flex flex-col pl-1 sm:pl-5">
                     <h5 className="text-xl sm:text-2xl font-semibold">About</h5>
-                    <a href="" className="hover:underline">About Us</a>
-                    <a href="" className="hover:underline">Our Services</a>
-                    <a href="" className="hover:underline">Our Portfolio</a>
-                    <a href="" className="hover:underline">Our Blog</a>
+                    <a href="" className="hover:underline text-sm sm:text-base">About Us</a>
+                    <a href="" className="hover:underline text-sm sm:text-base">Our Services</a>
+                    <a href="" className="hover:underline text-sm sm:text-base">Our Portfolio</a>
+                    <a href="" className="hover:underline text-sm sm:text-base">Our Blog</a>
                 </div>
-                <div className="col-span-4 flex flex-col">
+                <div className="sm:col-span-4 flex flex-col">
                     <h5 className="text-xl sm:text-2xl font-semibold">Follow us</h5>
                     <span className="flex gap-2">
                         <a href="" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
-                                className="w-8 h-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
+                                className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
                                 height="100%"
                                 style={{
                                     fillRule: "evenodd",
@@ -52,7 +52,7 @@ export default function Footer() {
                         <a href="" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
-                                className="w-8 h-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
+                                className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
                                 enableBackground="new 0 0 48 48"
                                 id="Layer_1"
                                 version="1.1"
@@ -76,7 +76,7 @@ export default function Footer() {
                         <a href="" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
-                                className="w-8 h-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
+                                className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
                                 id="Layer_1"
                                 style={{ enableBackground: "new 0 0 32 32" }}
                                 version="1.1"
@@ -130,7 +130,7 @@ export default function Footer() {
                 </div>
             </section>
             <section className="bg-neutral-900 text-center py-2">
-                <h6 className="text-white font-medium text-lg">Copyright ©{currentYear} SetapKu| Agustinus Henan All rights reserved.</h6>
+                <h6 className="text-white font-medium text-base md:text-lg">Copyright ©{currentYear} SetapKu| Agustinus Henan All rights reserved.</h6>
             </section>
         </footer>
     )

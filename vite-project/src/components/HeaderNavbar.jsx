@@ -30,7 +30,7 @@ export default function HeaderNavbar() {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                            <div className="flex flex-1 sm:flex-none items-center sm:mr-6 justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
                                         className="h-8 w-auto"
@@ -39,14 +39,14 @@ export default function HeaderNavbar() {
                                     />
                                 </div>
                             </div>
-                            <div className="relative hidden sm:block">
+                            <div className="relative hidden sm:block sm:flex-1">
                                 <label htmlFor="Search" className="sr-only"> Search </label>
 
                                 <input
                                     type="text"
                                     id="Search"
                                     placeholder="Search for..."
-                                    className="sm:w-36 md:w-full rounded-md border-gray-200 px-2 py-2.5 pe-10 shadow-lg focus:outline-none sm:text-sm"
+                                    className="w-full rounded-md border-gray-200 px-2 py-2.5 pe-10 shadow-lg focus:outline-none sm:text-sm"
                                 />
 
                                 <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
