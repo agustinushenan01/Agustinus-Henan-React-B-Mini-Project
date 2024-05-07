@@ -1,0 +1,11 @@
+input[type="file"].imageofproduct::file-selector-button {
+    background-color: #044DB5;
+    outline: none;
+    border: none;
+    color: #fff;
+    padding: 0.75rem 0.5rem;
+}
+
+input[type="file"].imageofproduct::file-selector-button:hover {
+    background-color: #00347E;
+}

@@ -1,5 +1,5 @@
 // import { supabase } from './utils/supabase'
-import PageNotFound from "./pages/PageNotFound"
+// import PageNotFound from "./pages/PageNotFound"
 import Navbar from "./components/HeaderNavbar"
 // import Home from "./pages/Home"
 // import Login from "./pages/Login"
@@ -7,6 +7,7 @@ import Navbar from "./components/HeaderNavbar"
 // import ProductDetail from "./pages/ProductDetail"
 // import Cart from "./pages/Cart"
 // import Checkout from "./pages/Checkout"
+import AdminProduct from "./pages/Admin/AdminProduct"
 import Footer from "./components/Footer"
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
     <main>
       <Navbar />
       {/* <Home /> */}
-      <PageNotFound />
+      {/* <PageNotFound /> */}
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <ProductDetail /> */}
       {/* <Cart /> */}
       {/* <Checkout /> */}
+      <AdminProduct />
       <Footer />
     </main>
   )
