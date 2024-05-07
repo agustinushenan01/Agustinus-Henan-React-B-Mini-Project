@@ -1,10 +1,10 @@
 export default function RegisterLayout() {
     return (
         <main>
-            <div className="flex min-h-full flex-1 flex-col justify-center py-12 lg:px-8">
+            <div className="flex flex-col justify-center flex-1 min-h-full py-12 lg:px-8">
                 <div className="bg-white mx-2 px-3 sm:mx-auto w-auto drop-shadow rounded-lg py-4 sm:w-[550px]">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                        <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">
                             Register your account
                         </h2>
                     </div>
@@ -91,7 +91,7 @@ export default function RegisterLayout() {
                                         Gender
                                     </label>
                                 </div>
-                                <div className="mt-2 flex gap-4">
+                                <div className="flex gap-4 mt-2">
                                     <section>
                                         <input type="radio" name="gender" id="male" className="mr-1" required />
                                         <label htmlFor="male">Male</label>
@@ -110,14 +110,14 @@ export default function RegisterLayout() {
                             <div>
                                 <button
                                     type="submit"
-                                    className="flex w-full justify-center rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-lightprimary focus:outline-none active:shadow-[1px_1px_0px_1px_rgba(0,0,0,0.3)] shadow-[5px_5px_0px_1px_rgba(0,0,0,0.3)]"
+                                    className="flex w-full justify-center rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-lightprimary fokusStyleButton"
                                 >
                                     Sign up
                                 </button>
                             </div>
                         </form>
 
-                        <p className="mt-10 mb-10 text-center text-sm text-gray-500">
+                        <p className="mt-10 mb-10 text-sm text-center text-gray-500">
                             Already have an account?{' '}
                             <a href="#" className="font-semibold leading-6 text-primary hover:text-lightprimary">
                                 Login here

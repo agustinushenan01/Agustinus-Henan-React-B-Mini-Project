@@ -82,7 +82,7 @@ export default function LandingPage() {
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 xl:gap-x-8">
                     {products.map((products) => (
-                        <a key={products.id} href={products.href} className="group">
+                        <a key={products.id} href={products.href} className="group bg-white drop-shadow rounded-lg pb-2 hover:drop-shadow-lg">
                             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                                 <img
                                     src={products.imageSrc}
@@ -90,8 +90,10 @@ export default function LandingPage() {
                                     className="h-full w-full object-cover object-center group-hover:opacity-75"
                                 />
                             </div>
-                            <h3 className="mt-4 text-sm text-gray-700">{products.name}</h3>
-                            <p className="mt-1 text-lg font-medium text-gray-900">{products.price}</p>
+                            <div className="px-2">
+                                <h3 className="mt-4 text-sm text-gray-700">{products.name}</h3>
+                                <p className="mt-1 text-lg font-medium text-gray-900">{products.price}</p>
+                            </div>
                         </a>
                     ))}
                 </div>
