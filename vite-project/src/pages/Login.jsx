@@ -1,4 +1,4 @@
-import LoginLayout from "../components/Auth/LoginLayout"
+import LoginLayout from "../components/Authen/LoginLayout"
 
 export default function Login() {
     return (

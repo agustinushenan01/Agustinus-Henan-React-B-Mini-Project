@@ -1,4 +1,55 @@
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+
 export default function LoginLayout() {
+    const [adminData, setAdminData] = useState([]);
+    const [usersData, setUsersData] = useState([]);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const FecthAdminURL = "https://663aafc0fee6744a6e9f2580.mockapi.io/Admin";
+    const FecthUserURL = "https://662b4fc8de35f91de157ccf6.mockapi.io/User";
+
+    const fetchAdmin = async () => {
+        try {
+            const response = await axios.get(FecthAdminURL);
+            setAdminData(response.data);
+        } catch (error) {
+            console.error('Error fetching admin data:', error);
+        }
+    };
+
+    const fetchUser = async () => {
+        try {
+            const response = await axios.get(FecthUserURL);
+            setUsersData(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAdmin();
+        fetchUser();
+    }, []);
+
+    const handleLogin = () => {
+        const user = usersData.find(User => User.email === email && User.password === password);
+        const admin = adminData.find(Admin => Admin.email === email && Admin.password === password);
+
+        if (user) {
+            localStorage.setItem('isLoggedIn', JSON.stringify(true));
+            navigate(location.state?.from || '/');
+        } else if (admin) {
+            localStorage.setItem('isAdmin', JSON.stringify(true));
+            navigate(location.state?.from || '/admin-product');
+        } else {
+            alert('Email atau password salah');
+        }
+    };
+
     return (
         <main>
             <div className="flex flex-col justify-center flex-1 min-h-full py-12 lg:px-8">
@@ -10,7 +61,7 @@ export default function LoginLayout() {
                     </div>
 
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form className="space-y-6" action="#" method="POST">
+                        <form className="space-y-6">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                     Email address
@@ -20,6 +71,8 @@ export default function LoginLayout() {
                                         id="email"
                                         name="email"
                                         type="email"
+                                        value={email}
+                                        onChange={(ev) => setEmail(ev.target.value)}
                                         placeholder="Enter your email"
                                         autoComplete="email"
                                         required
@@ -44,6 +97,8 @@ export default function LoginLayout() {
                                         id="password"
                                         name="password"
                                         type="password"
+                                        value={password}
+                                        onChange={(ev) => setPassword(ev.target.value)}
                                         placeholder="Enter your password"
                                         autoComplete="current-password"
                                         required
@@ -55,6 +110,7 @@ export default function LoginLayout() {
                             <div>
                                 <button
                                     type="submit"
+                                    onClick={handleLogin}
                                     className="flex w-full justify-center rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-lightprimary fokusStyleButton"
                                 >
                                     Sign in
@@ -64,14 +120,13 @@ export default function LoginLayout() {
 
                         <p className="mt-10 mb-10 text-sm text-center text-gray-500">
                             No account?{' '}
-                            <a href="#" className="font-semibold leading-6 text-primary hover:text-lightprimary">
+                            <Link to="/register" className="font-semibold leading-6 text-primary hover:text-lightprimary">
                                 Sign up
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </div>
             </div>
         </main>
-    )
+    );
 }
-
