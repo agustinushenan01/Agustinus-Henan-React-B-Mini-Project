@@ -97,22 +97,22 @@ export default function HeaderNavbar() {
 
                                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                     <span className="hidden sm:flex sm:gap-2">
-                                        <button
+                                        <Link to="/chat"
                                             type="button"
                                             className="relative p-1 text-gray-200 rounded-full bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
                                         >
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">View notifications</span>
                                             <EnvelopeIcon className="w-6 h-6" aria-hidden="true" />
-                                        </button>
-                                        <button
+                                        </Link>
+                                        <Link to="/cart"
                                             type="button"
                                             className="relative p-1 text-gray-200 rounded-full bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
                                         >
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">View cart</span>
                                             <ShoppingCartIcon className="w-6 h-6" aria-hidden="true" />
-                                        </button>
+                                        </Link>
                                     </span>
 
                                     {islogin ? (

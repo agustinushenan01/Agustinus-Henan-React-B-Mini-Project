@@ -25,14 +25,14 @@ function App() {
 
         {/* private untuk admin */}
         <Route element={<AdminRoute />}>
-          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/product-detail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="admin-product" element={<AdminProduct />} />
         </Route>
         {/* private untuk user */}
         <Route element={<UserRoute />}>
-          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/product-detail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
         </Route>

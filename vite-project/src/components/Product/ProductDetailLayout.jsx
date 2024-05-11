@@ -1,197 +1,101 @@
-import { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-
-const product = {
-    name: 'Basic Tee 6-Pack',
-    price: '$192',
-    href: '#',
-    images: [
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-            alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-            alt: 'Model wearing plain black basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-            alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-            alt: 'Model wearing plain white basic tee.',
-        },
-    ],
-    sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
-    ],
-    description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our proprietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-    ],
-    details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
+import { useEffect, useState } from 'react'
+import { supabase } from '../../utils/supabaseClient'
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../services/cartActions'
 
 export default function ProductDetailLayout() {
-    const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+    const [productData, setProductData] = useState(null)
+    const { id } = useParams();
+
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product)); // Dispatch action to add product to Redux store
+    };
+
+
+    useEffect(() => {
+        async function fetchProductData() {
+            const { data, error } = await supabase.from('Products').select().eq('id', id).single();
+            if (error) {
+                console.error('Error fetching product data:', error);
+            } else {
+                setProductData(data);
+            }
+        }
+        fetchProductData();
+    }, [id])
+
 
     return (
         <main className='w-full px-2 py-4'>
-            <div className="bg-white drop-shadow rounded-lg">
-                <div className="lg:pt-6 flex flex-col lg:flex-row">
-                    {/* Image gallery */}
-                    <div className=" sm:px-6">
-                        <div className="aspect-h-4 aspect-w-3 overflow-hidden rounded-lg lg:block">
-                            <img
-                                src={product.images[0].src}
-                                alt={product.images[0].alt}
-                                className="h-full w-full object-cover object-center"
-                            />
-                        </div>
-                        {/* <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+            {productData && (
+                <div className="bg-white drop-shadow rounded-lg">
+                    <div className="lg:pt-6 flex flex-col lg:flex-row">
+                        {/* Image gallery */}
+                        <div className=" sm:px-6">
+                            <div className="aspect-h-4 aspect-w-3 overflow-hidden rounded-lg lg:block">
                                 <img
-                                    src={product.images[1].src}
-                                    alt={product.images[1].alt}
-                                    className="h-full w-full object-cover object-center"
+                                    src={productData.productImage}
+                                    alt={productData.productName}
+                                    className="max-h-72 max-w-72 rounded-lg object-cover object-center"
                                 />
                             </div>
-                            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                                <img
-                                    src={product.images[2].src}
-                                    alt={product.images[2].alt}
-                                    className="h-full w-full object-cover object-center"
-                                />
-                            </div>
-                        </div> */}
-                        {/* <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-                            <img
-                                src={product.images[3].src}
-                                alt={product.images[3].alt}
-                                className="h-full w-full object-cover object-center"
-                            />
-                        </div> */}
-                    </div>
-
-                    {/* Product info */}
-                    <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-                        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
                         </div>
 
-                        {/* Options */}
-                        <div className="mt-4 lg:row-span-3 lg:mt-0">
-                            <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+                        {/* Product info */}
+                        <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+                            <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                                <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{productData.productName}</h1>
+                            </div>
 
-                            <form className="mt-10">
-                                {/* Sizes */}
-                                <div className="mt-10">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                            {/* Options */}
+                            <div className="mt-4 lg:row-span-3 lg:mt-0">
+                                <h2 className="sr-only">Product information</h2>
+                                <p className="text-3xl tracking-tight text-gray-900">${productData.productPrice}</p>
+
+                                <aside className="mt-10">
+                                    {/* Sizes */}
+                                    <div className="mt-10">
+                                        <div className="flex items-center justify-between">
+                                            <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                                        </div>
+                                        <p className="mt-3">{productData.productSize}</p>
                                     </div>
 
-                                    <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                                        <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
-                                        <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                                            {product.sizes.map((size) => (
-                                                <RadioGroup.Option
-                                                    key={size.name}
-                                                    value={size}
-                                                    disabled={!size.inStock}
-                                                    className={({ active }) =>
-                                                        classNames(
-                                                            size.inStock
-                                                                ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
-                                                                : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                                                            active ? 'ring-2 ring-indigo-500' : '',
-                                                            'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                                                        )
-                                                    }
-                                                >
-                                                    {({ active, checked }) => (
-                                                        <>
-                                                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                                                            {size.inStock ? (
-                                                                <span
-                                                                    className={classNames(
-                                                                        active ? 'border' : 'border-2',
-                                                                        checked ? 'border-indigo-500' : 'border-transparent',
-                                                                        'pointer-events-none absolute -inset-px rounded-md'
-                                                                    )}
-                                                                    aria-hidden="true"
-                                                                />
-                                                            ) : (
-                                                                <span
-                                                                    aria-hidden="true"
-                                                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                                                >
-                                                                    <svg
-                                                                        className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                                                        viewBox="0 0 100 100"
-                                                                        preserveAspectRatio="none"
-                                                                        stroke="currentColor"
-                                                                    >
-                                                                        <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                                                    </svg>
-                                                                </span>
-                                                            )}
-                                                        </>
-                                                    )}
-                                                </RadioGroup.Option>
-                                            ))}
-                                        </div>
-                                    </RadioGroup>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-darkprimary focus:outline-none active:shadow-[1px_1px_0px_1px_rgba(0,0,0,0.3)] shadow-[5px_5px_0px_1px_rgba(0,0,0,0.3)] selection:bg-gray-700 selection:text-white"
-                                >
-                                    Add to cart
-                                </button>
-                            </form>
-                        </div>
-
-                        <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-                            {/* Description and details */}
-                            <div>
-                                <h3 className="sr-only">Description</h3>
-
-                                <div className="space-y-6">
-                                    <p className="text-base text-gray-900">{product.description}</p>
-                                </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleAddToCart(productData)}
+                                        className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-darkprimary focus:outline-none active:shadow-[1px_1px_0px_1px_rgba(0,0,0,0.3)] shadow-[5px_5px_0px_1px_rgba(0,0,0,0.3)] selection:bg-gray-700 selection:text-white"
+                                    >
+                                        Add to cart
+                                    </button>
+                                </aside>
                             </div>
 
-                            <div className="mt-10">
-                                <h2 className="text-sm font-medium text-gray-900">Details</h2>
+                            <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+                                {/* Description and details */}
+                                <div>
+                                    <h3 className="sr-only">Description</h3>
 
-                                <div className="mt-4 space-y-6">
-                                    <p className="text-sm text-gray-600">{product.details}</p>
+                                    <div className="space-y-6">
+                                        <p className="text-base text-gray-900">{productData.productDescription}</p>
+                                    </div>
+                                </div>
+
+                                <div className="mt-10">
+                                    <h2 className="text-sm font-medium text-gray-900">Details</h2>
+
+                                    <div className="mt-4 space-y-6">
+                                        <p className="text-sm text-gray-600">{productData.productDetails}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </main>
     )
 }

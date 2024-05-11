@@ -64,7 +64,7 @@ export default function ProductListAdmin() {
                                 <tr className="border border-collapse" key={product.id}>
                                     <td className="px-2 py-1 border">{index + 1}</td>
                                     <td className="px-2 py-1 border">{product.productName}</td>
-                                    <td className="px-2 py-1 border w-56">{product.productDescription}</td>
+                                    <td className="px-2 py-1 border w-56">{product.productName}</td>
                                     <td className="px-2 py-1 border w-56">{product.productDetails}</td>
                                     <td className="flex px-2 py-1 justify-center">
                                         <img
