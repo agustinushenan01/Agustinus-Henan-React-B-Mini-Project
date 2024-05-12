@@ -48,7 +48,7 @@ export default function CartLayout() {
                                 />
                                 <div className="flex flex-col">
                                     <h3>{item.productDescription.slice(0, 22)}</h3>
-                                    <p>{item.productPrice}</p>
+                                    <p>${item.productPrice}</p>
                                     <div className="flex flex-row">
                                         <div className='grid mr-2 place-content-start'>
                                             {/* <label htmlFor="Quantity" className="sr-only"> Quantity </label> */}

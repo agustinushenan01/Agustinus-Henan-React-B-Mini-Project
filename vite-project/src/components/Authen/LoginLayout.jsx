@@ -61,7 +61,7 @@ export default function LoginLayout() {
                     </div>
 
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form className="space-y-6">
+                        <form onSubmit={handleLogin} className="space-y-6">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                     Email address
@@ -110,7 +110,6 @@ export default function LoginLayout() {
                             <div>
                                 <button
                                     type="submit"
-                                    onClick={handleLogin}
                                     className="flex w-full justify-center rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-lightprimary fokusStyleButton"
                                 >
                                     Sign in
