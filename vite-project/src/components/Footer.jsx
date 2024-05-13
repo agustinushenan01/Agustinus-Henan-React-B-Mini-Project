@@ -19,7 +19,7 @@ export default function Footer() {
                 <div className="sm:col-span-4 flex flex-col">
                     <h5 className="text-xl sm:text-2xl font-semibold">Follow us</h5>
                     <span className="flex gap-2">
-                        <a href="" className="hover:grayscale-[30%]"><>
+                        <a href="https://web.facebook.com/agung.henan07" target="_blank" rel="noopener" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
                                 className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
@@ -49,7 +49,7 @@ export default function Footer() {
                             </svg>
                         </>
                         </a>
-                        <a href="" className="hover:grayscale-[30%]"><>
+                        <a href="https://twitter.com/henan_agustinus" target="_blank" rel="noopener" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
                                 className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
@@ -73,7 +73,7 @@ export default function Footer() {
                             </svg>
                         </>
                         </a>
-                        <a href="" className="hover:grayscale-[30%]"><>
+                        <a href="https://www.instagram.com/agung.henan/" target="_blank" rel="noopener" className="hover:grayscale-[30%]"><>
                             {/*?xml version="1.0" ?*/}
                             <svg
                                 className="w-6 h-6 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:w-11 lg:h-11"
