@@ -1,11 +1,13 @@
 // CartLayout.js
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { removeFromCart } from '../../services/cartActions';
 import "./ProductDetailLayout"
 import { MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { increaseQuantity, decreaseQuantity, removeIfZeroQuantity } from '../../services/cartActions';
 
 export default function CartLayout() {
+    const navigate = useNavigate();
     const cartItems = useSelector(state => state.cart?.items) || [];  // Get items from cart slice
     const total = useSelector(state => state.cart?.total) || 0;  // Get total from cart slice
     const dispatch = useDispatch();
@@ -27,6 +29,17 @@ export default function CartLayout() {
         }
     };
 
+    const handleBuy = () => {
+        // Check if cart is empty
+        if (cartItems.length === 0) {
+            alert("Your cart is empty. Please add some products before proceeding to checkout.");
+        } else {
+            // Redirect user to checkout page
+            navigate('/checkout');
+        }
+    };
+
+
 
     return (
         <main className="px-2 py-6 bg-sky-50 sm:px-4">
@@ -47,7 +60,7 @@ export default function CartLayout() {
                                     alt={item.productName}
                                 />
                                 <div className="flex flex-col">
-                                    <h3>{item.productDescription.slice(0, 22)}</h3>
+                                    <h3>{item.productName.slice(0, 22)}</h3>
                                     <p>${item.productPrice}</p>
                                     <div className="flex flex-row">
                                         <div className='grid mr-2 place-content-start'>
@@ -79,7 +92,7 @@ export default function CartLayout() {
                                 <h6>Subtotal</h6>
                                 <p>${total.toFixed(2)}</p> {/* Display total price */}
                             </div>
-                            <button type="button" className='w-full text-white rounded-lg px-1.5 py-2.5 bg-primary fokusStyleButton'>Buy</button>
+                            <button type="button" className='w-full text-white rounded-lg px-1.5 py-2.5 bg-primary fokusStyleButton' onClick={handleBuy}>Buy</button>
                         </div>
                     </section>
                 </section>
