@@ -41,6 +41,42 @@ export default function CheckoutLayout() {
         }));
     };
 
+    function sendMessageToTelegram() {
+        let message = ""; // Inisialisasi pesan dengan string kosong
+    
+        // Loop through cart items to generate message template
+        cartItems.forEach(item => {
+            const deliveryOption = deliveryOptions[item.id] === 'DeliveryPriority' ? 'Next Day' : 'Standard';
+            message += `Nama product: ${item.productName}\nJumlah product: ${item.quantity} X ${formatPrice(item.productPrice)}\nDelivery method: ${deliveryOption}\n\n`;
+        });
+        message += `Total harga: ${formatPrice(calculateTotal())}`;
+    
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(message);
+    
+        // Token bot Telegram Anda
+        const token = '6990070685:AAG7oLKEGAasyp_VbCr7KGIFUjpFqmqtjjs';
+        // ID obrolan Telegram Anda
+        const chatId = '1995405819';
+    
+        // Construct Telegram API URL
+        const telegramURL = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodedMessage}`;
+    
+        // Kirim pesan ke Telegram menggunakan HTTP POST request
+        fetch(telegramURL, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Pesan berhasil dikirim ke Telegram.');
+                } else {
+                    console.error('Gagal mengirim pesan ke Telegram.');
+                }
+            })
+            .catch(error => console.error('Terjadi kesalahan:', error));
+    }
+    
+    
+
+
     return (
         <main className="px-2 py-6 bg-sky-50">
             <h1 className="py-3 text-2xl font-semibold lg:text-3xl">Checkout</h1>
@@ -129,7 +165,7 @@ export default function CheckoutLayout() {
                             </div>
                         </div>
                         <div className="pt-4 px-5 border-t">
-                            <button type="button" className='w-full text-white rounded-lg px-1.5 py-2.5 bg-primary focus:outline-none focus:ring-2 focus:ring-primary'>Buy</button>
+                            <button onClick={sendMessageToTelegram} type="button" className='w-full fokusStyleButton hover:bg-darkprimary text-white rounded-lg px-1.5 py-2.5 bg-primary focus:outline-none focus:ring-2 focus:ring-primary'>Buy</button>
                         </div>
                     </div>
                 </div>
