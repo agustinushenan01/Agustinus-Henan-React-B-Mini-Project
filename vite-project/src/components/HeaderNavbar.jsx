@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon, ArrowRightStartOnRectangleIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 import ProfileImage from "../../public/profil_user_icon.png"
+import LogoTransparan from "../../public/logo-transparent-svg.svg"
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -57,7 +58,7 @@ export default function HeaderNavbar() {
                                         <Link to="/">
                                             <img
                                                 className="w-auto h-8"
-                                                src="../../public/logo-transparent-svg.svg"
+                                                src={LogoTransparan}
                                                 alt="Setapku"
                                             />
                                         </Link>
