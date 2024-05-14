@@ -42,7 +42,8 @@ export default function CheckoutLayout() {
     };
 
     function sendMessageToTelegram() {
-        let message = ""; // Inisialisasi pesan dengan string kosong
+        // let message = ""; // Inisialisasi pesan dengan string kosong
+        let message = "Halo, saya tertarik dengan product anda yang ini\n";
     
         // Loop through cart items to generate message template
         cartItems.forEach(item => {
