@@ -8,8 +8,8 @@ export default function AddProductForm() {
     const [productDescription, setProductDescription] = useState('');
     const [productDetails, setProductDetails] = useState('');
     const [productSize, setProductSize] = useState('');
-    const [productStock, setProductStock] = useState(0);
-    const [productPrice, setProductPrice] = useState(0);
+    const [productStock, setProductStock] = useState('');
+    const [productPrice, setProductPrice] = useState('');
     const [productImage, setProductImage] = useState(null);
 
     const handleImageChange = (e) => {
@@ -68,7 +68,7 @@ export default function AddProductForm() {
 
 
     return (
-        <main className="py-5 px-2 flex flex-col mx-auto w-full sm:w-4/5 lg:w-3/4">
+        <main className="py-5 pb-24 px-2 flex flex-col mx-auto w-full sm:w-4/5 lg:w-3/4">
             <div className="bg-white drop-shadow rounded-lg px-3 py-4">
                 <h1 className="text-center font-bold text-2xl lg:text-3xl mb-5">Create Product</h1>
                 <form className="flex flex-col gap-5 mt-10" onSubmit={handleSubmit}>

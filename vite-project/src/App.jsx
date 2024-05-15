@@ -8,6 +8,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import AdminProduct from "./pages/Admin/AdminProduct";
+import ListProduct from "./pages/Admin/ListProduct";
 import Chat from "./pages/Chat";
 import AdminRoute from "./route/AdminRoute";
 import UserRoute from "./route/UserRoute";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="admin-product" element={<AdminProduct />} />
+          <Route path="list-product" element={<ListProduct />} />
         </Route>
         {/* private untuk user */}
         <Route element={<UserRoute />}>
