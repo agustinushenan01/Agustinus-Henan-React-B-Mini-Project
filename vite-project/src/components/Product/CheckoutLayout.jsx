@@ -56,9 +56,9 @@ export default function CheckoutLayout() {
         const encodedMessage = encodeURIComponent(message);
     
         // Token bot Telegram Anda
-        const token = '6990070685:AAG7oLKEGAasyp_VbCr7KGIFUjpFqmqtjjs';
+        const token = import.meta.env.VITE_TOKEN_BOT_TELEGRAM;
         // ID obrolan Telegram Anda
-        const chatId = '1995405819';
+        const chatId = import.meta.env.VITE_CHATID_BOT_TELEGRAM;
     
         // Construct Telegram API URL
         const telegramURL = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodedMessage}`;

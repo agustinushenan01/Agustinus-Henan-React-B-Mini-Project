@@ -11,7 +11,7 @@ export default function LandingPage() {
     }, [])
 
     async function getProducts() {
-        const { data } = await supabase.from("Products").select();
+        const { data } = await supabase.from("Products").select("*");
         setProducts(data);
     }
 

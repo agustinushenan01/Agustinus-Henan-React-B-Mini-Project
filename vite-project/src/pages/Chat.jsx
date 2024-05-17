@@ -1,28 +1,52 @@
-import '../assets/css/bgPatternCss.css'
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
+import '../assets/css/bgPatternCss.css';
+import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { supabase } from '../utils/supabaseClient'; // Impor klien Supabase Anda
 
 export default function Chat() {
-    // const [respond, setRespond] = useState();
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
 
-    // const API_KEY = import.meta.env.VITE_API_KEY;
-    const API_KEY = "sk-proj-I8gY7bR1k1WP7wab2GVxT3BlbkFJ5uXNr3sUOMOVxPFqcynh";
+    const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+    
+    const handleProductQuery = async (query) => {
+        try {
+            let { data: products, error } = await supabase
+                .from('Products')
+                .select('productName, productPrice, productStock, productSize, productDetails, productDescription');
+
+            if (error) {
+                throw error;
+            }
+
+            // Logika untuk menemukan detail produk berdasarkan pertanyaan
+            const product = products.find(p => 
+                query.toLowerCase().includes(p.productName.toLowerCase())
+            );
+
+            if (product) {
+                return `Detail produk:\nNama: ${product.productName}\nHarga: Rp${product.productPrice}\nStok: ${product.productStock}\nUkuran: ${product.productSize}\nDetil: ${product.productDetails}\nDeskripsi: ${product.productDescription}`;
+            } else {
+                return "Maaf, saya tidak dapat menemukan produk yang Anda tanyakan.";
+            }
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            return "Maaf, terjadi kesalahan saat mengambil informasi produk.";
+        }
+    };
+
     const handleSubmit = async (e) => {
-        //menyambungkan ke Open ai dan memasukkan prompt
         e.preventDefault();
 
-        //todo Mengatur kepribadian ai
         const promptAwal =
             'kamu adalah ChatBot, ChatBot adalah asisten pribadi user(pemberi pertanyaan) dalam dunia E-commerce!, ChatBot harus menjawab menggunakan bahasa yang mudah dimengerti dan menghindari penggunaan jargon teknis.';
-        // ini adalah cara setting open ai
+
         const APIBody = {
             model: 'gpt-4',
             messages: [
                 {
                     role: 'user',
-                    content: `${promptAwal} + pertanyaan dari user${prompt}`
+                    content: `${promptAwal} + pertanyaan dari user: ${prompt}`
                 }
             ]
         };
@@ -43,10 +67,21 @@ export default function Chat() {
 
             const data = await response.json();
             console.log(data);
+
             const userMessage = { role: 'user', content: prompt };
-            const botMessage = { role: 'bot', content: data.choices[0].message.content };
+            let botMessageContent = data.choices[0].message.content;
+
+            if (prompt.toLowerCase().includes('produk') || 
+                prompt.toLowerCase().includes('stok') || 
+                prompt.toLowerCase().includes('harga') || 
+                prompt.toLowerCase().includes('ukuran') || 
+                prompt.toLowerCase().includes('detail') || 
+                prompt.toLowerCase().includes('deskripsi')) {
+                botMessageContent = await handleProductQuery(prompt);
+            }
+
+            const botMessage = { role: 'bot', content: botMessageContent };
             setMessages([...messages, userMessage, botMessage]);
-            // setRespond(data.choices[0].message.content);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -84,7 +119,6 @@ export default function Chat() {
                                     />
                                     <path d="M8 16h8v2H8z" fill="#ffffff" className="fill-000000" />
                                 </svg>
-
                             </span>
                             <h1 className="font-medium">ChatBot</h1>
                         </div>
@@ -94,7 +128,6 @@ export default function Chat() {
                             <h1 className="font-medium text-lg">ChatBot</h1>
                         </section>
                         <div className='px-2 '>
-                            {/* Rendering chat messages */}
                             {messages.map((message, index) => (
                                 <div key={index} className={`flex w-full justify-${message.role === 'user' ? 'end' : 'start'}`}>
                                     <section className={`h-auto bg-primary max-w-72 selection:bg-gray-600 selection:text-white px-3 py-1 rounded-lg text-white mt-4`}>
@@ -102,11 +135,10 @@ export default function Chat() {
                                     </section>
                                 </div>
                             ))}
-                            {/* End rendering chat messages */}
                         </div>
                         <section className='w-full lg:w-[75%] flex fixed bottom-0'>
                             <form onSubmit={handleSubmit} className='px-1 py-1 flex gap-1 mt-5 bg-zinc-800 w-full rounded-b-lg lg:rounded-br-lg'>
-                                <input type="text" placeholder='Type a message' value={prompt} onChange={(e) => setPrompt(e.target.value)}
+                                <input type="text" placeholder='Ketik pesan' value={prompt} onChange={(e) => setPrompt(e.target.value)}
                                     className='border-none bg-transparent text-white rounded-full w-[95%] focus:outline-none px-2 py-1' />
                                 <button type="submit" className="hover:bg-gray-600 hover:rounded-lg px-1 py-1"><PaperAirplaneIcon className="w-6 h-6 text-white" aria-hidden="true" /></button>
                             </form>
@@ -116,5 +148,5 @@ export default function Chat() {
             </section>
             <div className="hidden lg:block lg:col-span-2"></div>
         </main>
-    )
+    );
 }
