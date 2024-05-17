@@ -1,15 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 export default function AdminRoute() {
-    const isAdmin = localStorage.getItem("isAdmin")
+    const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+    const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
 
-    if (isAdmin == "false") {
+    if (!isLoggedIn || !isAdmin) {
         return <Navigate to="/login" />;
     }
 
-    return (
-        <>
-            <Outlet />
-        </>
-    )
+    return <Outlet />;
 }

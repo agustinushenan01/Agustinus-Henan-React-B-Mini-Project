@@ -1,15 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 export default function UserRoute() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn")
+    const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
 
-    if (isLoggedIn == "false") {
+    if (!isLoggedIn) {
         return <Navigate to="/login" />;
     }
 
-    return (
-        <>
-            <Outlet />
-        </>
-    )
+    return <Outlet />;
 }

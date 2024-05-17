@@ -7,8 +7,8 @@ export default function Chat() {
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const API_KEY = import.meta.env.VITE_API_KEY;
-    // const API_KEY = "sk-proj-I8gY7bR1k1WP7wab2GVxT3BlbkFJ5uXNr3sUOMOVxPFqcynh";
+    // const API_KEY = import.meta.env.VITE_API_KEY;
+    const API_KEY = "sk-proj-I8gY7bR1k1WP7wab2GVxT3BlbkFJ5uXNr3sUOMOVxPFqcynh";
     const handleSubmit = async (e) => {
         //menyambungkan ke Open ai dan memasukkan prompt
         e.preventDefault();

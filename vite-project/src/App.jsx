@@ -19,28 +19,26 @@ function App() {
     <main>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/chat" element={<Chat />} />
 
-        {/* private untuk admin */}
-        <Route element={<AdminRoute />}>
-          <Route path="/product-detail/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="admin-product" element={<AdminProduct />} />
-          <Route path="list-product" element={<ListProduct />} />
-        </Route>
-        {/* private untuk user */}
+        {/* Rute privat untuk pengguna */}
         <Route element={<UserRoute />}>
           <Route path="/product-detail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
         </Route>
+
+        {/* Rute privat untuk admin */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin-product" element={<AdminProduct />} />
+          <Route path="/list-product" element={<ListProduct />} />
+        </Route>
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-
       <Footer />
     </main>
   );
