@@ -19,6 +19,16 @@ export default function RegisterLayout() {
         }
 
         try {
+            // Cek apakah email sudah digunakan
+            const { data: users } = await axios.get('https://662b4fc8de35f91de157ccf6.mockapi.io/User');
+            const emailExists = users.some(user => user.email === email);
+
+            if (emailExists) {
+                alert('Email telah digunakan oleh akun lain');
+                return;
+            }
+
+            // Jika email belum digunakan, lanjutkan pendaftaran
             const response = await axios.post('https://662b4fc8de35f91de157ccf6.mockapi.io/User', {
                 email,
                 password,
@@ -29,11 +39,11 @@ export default function RegisterLayout() {
             if (response.status === 201) {
                 alert('Registrasi berhasil');
                 navigate('/login');
-                setEmail('')
-                setPassword('')
-                setConfirmPassword('')
-                setFullName('')
-                setGender('')
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setFullName('');
+                setGender('');
             }
         } catch (error) {
             console.error('Error during registration:', error);
