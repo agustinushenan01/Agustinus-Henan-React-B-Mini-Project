@@ -1,45 +1,55 @@
 import '../assets/css/bgPatternCss.css';
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'; // Impor klien Supabase Anda
 
 export default function Chat() {
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    async function getProducts() {
+        const { data } = await supabase.from("Products").select("*");
+        setProducts(data);
+    }
 
     const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
     
-    const handleProductQuery = async (query) => {
-        try {
-            let { data: products, error } = await supabase
-                .from('Products')
-                .select('productName, productPrice, productStock, productSize, productDetails, productDescription');
+    // const handleProductQuery = async (query) => {
+    //     try {
+    //         let { data: products, error } = await supabase
+    //             .from('Products')
+    //             .select('productName, productPrice, productStock, productSize, productDetails, productDescription');
 
-            if (error) {
-                throw error;
-            }
+    //         if (error) {
+    //             throw error;
+    //         }
 
-            // Logika untuk menemukan detail produk berdasarkan pertanyaan
-            const product = products.find(p => 
-                query.toLowerCase().includes(p.productName.toLowerCase())
-            );
+    //         // Logika untuk menemukan detail produk berdasarkan pertanyaan
+    //         const product = products.find(p => 
+    //             query.toLowerCase().includes(p.productName.toLowerCase())
+    //         );
 
-            if (product) {
-                return `Detail produk:\nNama: ${product.productName}\nHarga: Rp${product.productPrice}\nStok: ${product.productStock}\nUkuran: ${product.productSize}\nDetil: ${product.productDetails}\nDeskripsi: ${product.productDescription}`;
-            } else {
-                return "Maaf, saya tidak dapat menemukan produk yang Anda tanyakan.";
-            }
-        } catch (error) {
-            console.error('Error fetching products:', error);
-            return "Maaf, terjadi kesalahan saat mengambil informasi produk.";
-        }
-    };
+    //         if (product) {
+    //             return `Detail produk:\nNama: ${product.productName}\nHarga: Rp${product.productPrice}\nStok: ${product.productStock}\nUkuran: ${product.productSize}\nDetil: ${product.productDetails}\nDeskripsi: ${product.productDescription}`;
+    //         } else {
+    //             return "Maaf, saya tidak dapat menemukan produk yang Anda tanyakan.";
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching products:', error);
+    //         return "Maaf, terjadi kesalahan saat mengambil informasi produk.";
+    //     }
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const promptAwal =
-            'kamu adalah ChatBot, ChatBot adalah asisten pribadi user(pemberi pertanyaan) dalam dunia E-commerce!, ChatBot harus menjawab menggunakan bahasa yang mudah dimengerti dan menghindari penggunaan jargon teknis.';
+            'kamu adalah ChatBot, ChatBot adalah asisten pribadi user(pemberi pertanyaan) dalam dunia E-commerce!, ChatBot harus menjawab menggunakan bahasa yang mudah dimengerti dan menghindari penggunaan jargon teknis. Apabila user bertanya mengenai product maka anda dapat mengakses dari data di ${products}';
 
         const APIBody = {
             model: 'gpt-4',
@@ -71,14 +81,14 @@ export default function Chat() {
             const userMessage = { role: 'user', content: prompt };
             let botMessageContent = data.choices[0].message.content;
 
-            if (prompt.toLowerCase().includes('produk') || 
-                prompt.toLowerCase().includes('stok') || 
-                prompt.toLowerCase().includes('harga') || 
-                prompt.toLowerCase().includes('ukuran') || 
-                prompt.toLowerCase().includes('detail') || 
-                prompt.toLowerCase().includes('deskripsi')) {
-                botMessageContent = await handleProductQuery(prompt);
-            }
+            // if (prompt.toLowerCase().includes('produk') || 
+            //     prompt.toLowerCase().includes('stok') || 
+            //     prompt.toLowerCase().includes('harga') || 
+            //     prompt.toLowerCase().includes('ukuran') || 
+            //     prompt.toLowerCase().includes('detail') || 
+            //     prompt.toLowerCase().includes('deskripsi')) {
+            //     botMessageContent = await handleProductQuery(prompt);
+            // }
 
             const botMessage = { role: 'bot', content: botMessageContent };
             setMessages([...messages, userMessage, botMessage]);
