@@ -6,7 +6,7 @@ SetupKu adalah aplikasi yang membantu pengguna membangun setup laptop/PC mereka 
 
 ## Features
 - landing page dinamis (GET) akan ada card/list produk 
-- Login default ( user / admin) 
+- Login dinamis untuk (user), untuk admin sudah di set default
 - detail barang dan keranjang
 - pembayaran lewat admin WA 
 - tambahkan barang untuk admin (CRUD) 
@@ -19,21 +19,29 @@ SetupKu adalah aplikasi yang membantu pengguna membangun setup laptop/PC mereka 
 
 ### User
 - landing page dinamis (GET) akan ada card/list produk 
-- Login default ( user / admin) 
-- detail barang dan keranjang
+- Login dinamis (user)
+- Register
+- detail product 
+- keranjang
+- checkout
 
 ### Admin
-- tambahkan barang untuk admin (CRUD) 
-- lihat list barang
+- Create new product (admin)
+- View product, edit product, and delete product (admin)
 
 ## Tech Stacks
 sebutkan daftar tools dan framework yang digunakan dalam bentuk list seperti ini:
+- Node
+- Vs code
+- Git bash
+- Github
+- Postman
+- Cursor
 - React
 - Tailwind
-- Postman
 
 ## Live App Demo
-sertakan link web yang sudah dideploy.
+[Link demo app](https://agustinus-henan-react-b-mini-project.vercel.app/)
 
 ## Setup 
 sebutkan cara menggunakan project ini di lokal
