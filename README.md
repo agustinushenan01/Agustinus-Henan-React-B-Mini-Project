@@ -47,3 +47,6 @@ daftar tools dan framework:
 Pada homepage user akan melihat product yang ada di website ini dan user wajib login apabila ingin melihat detail product. Dan apabila belum ada akun
 maka user bisa daftarkan akun baru. dan setelah login user klik product card di homepage maka akan diarahkan ke halaman product detail di pada halaman ini user dapat melihat detail 
 product dan dapat ditambahkan ke keranjang. Setelah itu pada cartpage user dapat melakukan chechout dari product yang ditambahkan. Dan dihalaman checkout itu user bisa pilih delivery method dan klik beli maka semua pesanan itu akan masuk ke telegram bot.
+
+**_Tampilan Website nya:_**
+![Landing Page](https://hcpkytmpbxvwoywiksxf.supabase.co/storage/v1/object/public/Productimage/2024-05-19_22h27_11.png)
