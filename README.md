@@ -49,4 +49,4 @@ maka user bisa daftarkan akun baru. dan setelah login user klik product card di 
 product dan dapat ditambahkan ke keranjang. Setelah itu pada cartpage user dapat melakukan chechout dari product yang ditambahkan. Dan dihalaman checkout itu user bisa pilih delivery method dan klik beli maka semua pesanan itu akan masuk ke telegram bot.
 
 **_Tampilan Website nya:_**
-![Landing Page](https://hcpkytmpbxvwoywiksxf.supabase.co/storage/v1/object/public/Productimage/2024-05-19_22h27_11.png)
+![Landing Page](./vite-project/public/LandingPage.png)
